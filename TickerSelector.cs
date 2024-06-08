@@ -2,18 +2,18 @@
 {
     public static class TickerSelector
     {
-        public static string GetRandomTicker(Random random, string filePath)
+        public static Ticker GetRandomTicker(Random random, string filePath)
         {
-            var fileData = File.ReadLines(filePath);
-            var tickers = new List<string>();
-            foreach (var line in fileData)
-            {
-                var items = line.Split(" ");
-                tickers.Add(items[0]);
-            }
+            var fileData = File.ReadLines(filePath).ToList();
+            var index = random.Next(fileData.Count);
+            var data = fileData[index].Split(" ");
 
-            var index = random.Next(tickers.Count);
-            return tickers[index];
+            return new Ticker
+            {
+                Symbol = data[0].Trim(),
+                Name = data[1].Trim(),
+                Sector = data[2].Trim()
+            };
         }
     }
 }

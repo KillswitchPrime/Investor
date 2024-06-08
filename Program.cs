@@ -24,7 +24,7 @@ while (tradeExecuted is false)
     var ticker = TickerSelector.GetRandomTicker(random, filePath);
 
     var result = await alpacaClient.PostOrderAsync(new NewOrderRequest(
-            ticker,
+            ticker.Symbol,
             25,
             OrderSide.Buy,
             OrderType.Market,
@@ -38,5 +38,5 @@ while (tradeExecuted is false)
     }
 
     tradeExecuted = true;
-    Console.WriteLine($"Created buy order for ticker: {ticker}, of quantity: 25.");
+    Console.WriteLine($"Created buy order for ticker: {ticker.Symbol}, name: {ticker.Name} of quantity: 25.");
 }
